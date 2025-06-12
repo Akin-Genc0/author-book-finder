@@ -1,5 +1,5 @@
 const bookAuthor = document.querySelector('#author');
-const bookTitle = document.querySelector('#title');
+const bookTitle = document.querySelector('#t');
 const addBtn = document.querySelector('#addBtn');
 const result = document.querySelector('.result');
 
@@ -18,17 +18,25 @@ if(!resp.ok){
 
 const data = await resp.json();
 
+
+//dropdown logic 
+ for(let i = 0; i < data.docs.length; i++){
+
+    const opt = document.createElement('option');
+    const text = document.createTextNode(data.docs[i].title);
+    opt.append(text);
+    bookTitle.append(opt);
+}
+ 
 } catch(error){
     console.error(error)
 }
 
-
 }
 
 
 
-
 addBtn.addEventListener('click', function() {
-
+bookTitle.textContent = "";
 getData()
 });
